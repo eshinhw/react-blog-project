@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Modal from "./Modal";
 
 const data = [
   { title: "Men's Fashion", date: "2021 August 23" },
@@ -8,29 +9,32 @@ const data = [
 ];
 
 function App() {
-  
-  const [title, setTitle] = useState("First Title");
   const [date, setDate] = useState("August 31, 2023");
   const [likeCount, setLikeCount] = useState(0);
-  
-  const [titles, setTitles] = useState(["Men's Fashion", "Women's Fashion", "Children"])
-  
-  
-  const increaseLike = (e) => {
-    console.log(e)
-    setLikeCount(likeCount + 1);
-  }
 
+  const [titles, setTitles] = useState(["Men's Fashion", "Women's Fashion", "Children"]);
+  const [likes, setLikes] = useState([0]);
+  const [modal, setModal] = useState(false);
+
+  const displayModal = () => {
+    setModal(!modal);
+  };
+
+  const increaseLike = (e) => {
+    setLikes([...likes]);
+  };
 
   const changeTitle = () => {
-    setTitle("Second Title");
-  }
+    let copy = [...titles];
+    copy[1] = "Second Title";
+    setTitles(copy);
+  };
 
   const sortTitles = () => {
-    let copy = [...titles]
-    copy.sort()
-    setTitles(copy)
-  }
+    let copy = [...titles];
+    copy.sort();
+    setTitles(copy);
+  };
 
   return (
     <div className="App">
@@ -38,33 +42,27 @@ function App() {
         <p style={{ fontSize: "30px" }}>ReactBlog</p>
       </div>
       <div className="list">
-        {/* {data.map((d, idx) => {
+        {titles.map((title, idx) => {
           return (
             <div key={idx} className="list-item">
-              <h2>{d.title} <span onClick={increaseLike}>Like</span> {likeCount} </h2>
-              <p>{d.date}</p>
+              <h2>
+                {title} <span onClick={increaseLike}>👍</span> {likes[idx] + 1}
+              </h2>
+              {/* <p>{d.date}</p> */}
             </div>
           );
-        })} */}
-        <div className="list-item">
-          <h2>{ titles[0] } <span onClick={increaseLike}>Like</span> {likeCount}</h2>
-          <p>August 23, 2022</p>
-        </div>
-        <div className="list-item">
-          <h2>{ titles[1] }</h2>
-          <p>August 23, 2022</p>
-        </div>
-        <div className="list-item">
-          <h2>{ titles[2] }</h2>
-          <p>August 23, 2022</p>
-        </div>
+        })}
       </div>
+
+      {
+        modal ? <Modal /> : null // ternary operator
+      }
 
       <button onClick={sortTitles}>Sort</button>
 
       <button onClick={changeTitle}>Change Title</button>
 
-      
+      <button onClick={displayModal}>Show Modal</button>
     </div>
   );
 }
