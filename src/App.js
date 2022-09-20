@@ -55,7 +55,7 @@ function App() {
       </div>
 
       {
-        modal ? <Modal /> : null // ternary operator
+        modal ? <Modal titles={titles}/> : null // ternary operator
       }
 
       <button onClick={sortTitles}>Sort</button>
