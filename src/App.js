@@ -13,11 +13,13 @@ function App() {
   const [likeCount, setLikeCount] = useState(0);
 
   const [titles, setTitles] = useState(["Men's Fashion", "Women's Fashion", "Children"]);
+  const [currTitle, setCurrTitle] = useState(0);
   const [likes, setLikes] = useState([0]);
   const [modal, setModal] = useState(false);
 
-  const displayModal = () => {
+  const displayModal = (e) => {
     setModal(!modal);
+    setCurrTitle(idx);
   };
 
   const increaseLike = (e) => {
@@ -26,7 +28,7 @@ function App() {
 
   const changeTitle = () => {
     let copy = [...titles];
-    copy[1] = "Second Title";
+    copy[0] = "Second Title";
     setTitles(copy);
   };
 
@@ -45,9 +47,10 @@ function App() {
         {titles.map((title, idx) => {
           return (
             <div key={idx} className="list-item">
-              <h2>
-                {title} <span onClick={increaseLike}>👍</span> {likes[idx] + 1}
+              <h2 onClick={displayModal}>
+                {title} <span onClick={increaseLike}>👍 {likes[idx] + 1}</span>{" "}
               </h2>
+
               {/* <p>{d.date}</p> */}
             </div>
           );
@@ -55,14 +58,12 @@ function App() {
       </div>
 
       {
-        modal ? <Modal titles={titles}/> : null // ternary operator
+        modal ? <Modal titles={titles} currTitle={currTitle} changeTitle={changeTitle} /> : null // ternary operator
       }
 
       <button onClick={sortTitles}>Sort</button>
 
       <button onClick={changeTitle}>Change Title</button>
-
-      <button onClick={displayModal}>Show Modal</button>
     </div>
   );
 }
