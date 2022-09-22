@@ -1,9 +1,13 @@
 .navbar {
   background-color: black;
   color: white;
-  padding: 20px;
+  padding: 10px;
 }
 
 .list-item {
   border-bottom: 1px solid black;
+}
+
+.post-input {
+  padding: 20px;
 }
