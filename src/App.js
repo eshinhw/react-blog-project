@@ -17,11 +17,6 @@ function App() {
   const [likes, setLikes] = useState([0]);
   const [modal, setModal] = useState(false);
 
-  const displayModal = (e) => {
-    setModal(!modal);
-    setCurrTitle(idx);
-  };
-
   const increaseLike = (e) => {
     setLikes([...likes]);
   };
@@ -47,7 +42,10 @@ function App() {
         {titles.map((title, idx) => {
           return (
             <div key={idx} className="list-item">
-              <h2 onClick={displayModal}>
+              <h2 onClick={() => {
+                setModal(!modal);
+                setCurrTitle(idx);
+              }}>
                 {title} <span onClick={increaseLike}>👍 {likes[idx] + 1}</span>{" "}
               </h2>
 
