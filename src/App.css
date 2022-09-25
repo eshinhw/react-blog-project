@@ -1,0 +1,13 @@
+.main-bg {
+  width: 2000px;
+  background-position: center;
+}
+
+.column-container {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.product-details {
+  text-align: center;
+}
