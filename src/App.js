@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import "./App.css";
 import NavBarDark from "./Navbar";
 import { data } from "./data";
@@ -6,8 +6,7 @@ import { useState } from "react";
 import Product from "./Product";
 
 function App() {
-  let [lemons, setLemons] = useState(data);
-  console.log(lemons)
+  let [lemons] = useState(data);
   return (
     <div className="App">
       <NavBarDark />
@@ -17,10 +16,8 @@ function App() {
 
       <Container className="column-container">
         <Row className="row-container" xs="auto">
-          {lemons.map(function(obj) {
-            return(
-              <Product obj={obj} />
-            )
+          {lemons.map(function (obj) {
+            return <Product obj={obj} />;
           })}
         </Row>
       </Container>
